@@ -3,20 +3,19 @@ import math
 import numdifftools as nd
 from gpso import gpso
 from obstacles import *
+
 import matplotlib.pyplot as plt
 
-swarmSize=64                      # number of the swarm particles
+swarmSize=64                       # number of the swarm particles
 maxIter=100                        # maximum number of iterations
-deltaTime=1e-3
-inertia=1
-tau=1*(0.01/deltaTime);
+deltaTime=0.01
+inertia=1.61803398875
 initialInertia=1.61803398875
-socialFactor=1.61803398875*(tau**2);
-globalFactor=1.61803398875*(tau**2);
-learningRate=1.61803398875*(tau**2);
-terminateDistance=2
-minimise=0
+socialFactor=1.61803398875*(deltaTime/0.01)
+globalFactor=1.61803398875*(deltaTime/0.01)
+learningRate=1.61803398875
 decayDistance=0.5
+maximise=1
 
 destination=np.array([180,400])
 initialPosition = np.array([0,0])
@@ -46,7 +45,7 @@ def objectivefunction(x,v):
 
 
 [minima, v]=gpso.optimise(initialPosition=initialPosition,swarmSize=swarmSize,maxIter=maxIter,initialInertia=inertia,socialFactor
-=socialFactor,globalFactor=globalFactor,maxSpeedGBest=1800*(tau**2)*(deltaTime/0.01),maxSpeedNeighbours=3600*(tau**2)*(deltaTime/0.01),learningRate=learningRate
+=socialFactor,globalFactor=globalFactor,maxSpeedGBest=1800*(deltaTime/0.01),maxSpeedNeighbours=3600*(deltaTime/0.01),learningRate=learningRate
 ,decayDistance=decayDistance,deltaTime=deltaTime,minimise=True,objectivefunction=objectivefunction)
 
 

@@ -17,9 +17,6 @@ class Ellipsoid(obstacle.Obstacle):
 		self.rolloff=rolloff
 		self.beta=beta
 
-	def f(self):
-	        return 'hello world'
-
 	def display(self):
 		
 		print(self.origin)
@@ -30,6 +27,5 @@ class Ellipsoid(obstacle.Obstacle):
 	def repel(self,position,velocity,a):
 		y=0
 		cosine=np.sum(velocity*position,axis=a)/(np.linalg.norm(velocity)*(1+(np.linalg.norm((position-self.origin)/self.radius,axis =a)**2)**self.rolloff))
-		print(cosine)
-		y=self.magnitude*((-cosine)**self.beta)*(np.linalg.norm(velocity)/(1+(np.linalg.norm((position-self.origin)/self.radius,axis =a)**2)**self.rolloff))/(1+(np.linalg.norm((position-self.origin)/self.radius,axis =a)**2)**self.rolloff)
+		y=self.magnitude/(1+(np.linalg.norm((position-self.origin)/self.radius,axis =a)**2)**self.rolloff)#self.magnitude*((-cosine)**self.beta)*(np.linalg.norm(velocity)/(1+(np.linalg.norm((position-self.origin)/self.radius,axis =a)**2)**self.rolloff))/(1+(np.linalg.norm((position-self.origin)/self.radius,axis =a)**2)**self.rolloff)
 		return y
